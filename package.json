@@ -1,0 +1,17 @@
+{
+  "name": "p2p-chat-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "apollo-server": "^2.14.1",
+    "graphql": "^15.0.0",
+    "mongoose": "^5.9.16"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "run": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
