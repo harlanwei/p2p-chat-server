@@ -9,6 +9,14 @@ module.exports = gql`
     type: Int
   }
 
+  input MessageInput {
+    content: String!
+    sender: String!
+    receiver: String!
+    time: String!
+    type: Int!
+  }
+
   type User {
     username: String
     password: String
@@ -16,13 +24,23 @@ module.exports = gql`
     nickname: String
   }
 
+  type Group {
+    id: String
+    members: [String]
+    title: String
+  }
+
   type Query {
-    MessagesBetween(participantA: String, participantB: String): [Message]
     Login(username: String, password: String): User
+    MessagesBetween(participantA: String, participantB: String): [Message]
+    RetrieveGroupInfo(id: String!): Group
   }
 
   type Mutation {
     Register(username: String!, password: String!, nickname: String!): User
-    ChangeNickname(username: String!, nickname: String!): User
+    ChangeAvatar(username: String!, avatarId: Int!): User
+    SaveMessages(initiator: String!, messages: [MessageInput]): String
+    RemoveGroupMembers(groupId: String!, memberUsernames: [String]!): Group
+    AddGroupMembers(groupId: String!, memberUsernames: [String]!): Group
   }
 `;

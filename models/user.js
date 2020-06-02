@@ -3,7 +3,7 @@ module.exports = {
   schema: {
     username: String,
     password: String,
-    nickname: String,
-    avatar: String,
+    avatar: Number,
+    messages: Array,
   },
 };

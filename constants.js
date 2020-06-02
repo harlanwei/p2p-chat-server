@@ -4,6 +4,7 @@ module.exports = {
   MESSAGE_TYPE: {
     TEXT: 0,
     IMAGE: 1,
+    FILE: 2,
     AUDIO: 3,
   },
 };

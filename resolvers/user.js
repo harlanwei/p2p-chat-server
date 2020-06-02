@@ -5,19 +5,21 @@ module.exports = {
   Query: {
     Login: async ($0, { username, password }) => {
       const targets = await User.find({ username }).exec();
-      return !_.isEmpty(targets) && targets[0].password === password
-        ? targets[0]
-        : null;
+      if (_.isEmpty(targets) || targets[0].password !== password) return null;
+      const user = targets[0];
+      delete user.message;
+      return user;
     },
   },
 
   Mutation: {
-    Register: async ($0, { username, password, nickname }) => {
+    Register: async ($0, { username, password }) => {
       const possibleConflicts = await User.find({ username }).exec();
       if (!_.isEmpty(possibleConflicts)) return null;
       const constructedItem = {
         ...arguments[1],
-        avatar: "",
+        avatar: 0,
+        message: [],
       };
       try {
         await new User(constructedItem).save();
@@ -28,8 +30,14 @@ module.exports = {
       }
     },
 
-    ChangeNickname: async ($0, { username, nickname }) => {
-      /* TODO */
+    ChangeAvatar: async ($0, { username, avatarId }) => {
+      const target = await User.find({ username }).exec();
+      if (_.isEmpty(target)) return null;
+      const user = target[0];
+      user.avatar = avatarId;
+      await user.save();
+      delete user.message;
+      return user;
     },
   },
 };
