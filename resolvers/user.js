@@ -17,7 +17,8 @@ module.exports = {
       const possibleConflicts = await User.find({ username }).exec();
       if (!_.isEmpty(possibleConflicts)) return null;
       const constructedItem = {
-        ...arguments[1],
+        username,
+        password,
         avatar: 0,
         message: [],
       };
