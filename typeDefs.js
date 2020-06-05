@@ -20,8 +20,7 @@ module.exports = gql`
   type User {
     username: String
     password: String
-    avatar: String
-    nickname: String
+    avatar: Int
   }
 
   type Group {
@@ -37,7 +36,7 @@ module.exports = gql`
   }
 
   type Mutation {
-    Register(username: String!, password: String!, nickname: String!): User
+    Register(username: String!, password: String!): User
     ChangeAvatar(username: String!, avatarId: Int!): User
     SaveMessages(initiator: String!, messages: [MessageInput]): String
     RemoveGroupMembers(groupId: String!, memberUsernames: [String]!): Group
