@@ -5,9 +5,9 @@ const { User } = models;
 module.exports = {
   Query: {
     MessagesBetween: async ($0, { participantA, participantB }) => {
-      const traget = await User.find({ username: participantA });
-      if (_.isEmpty(traget)) return null;
-      return traget[0].messages.filter(
+      const target = await User.find({ username: participantA });
+      if (_.isEmpty(target)) return null;
+      return target[0].messages.filter(
         (m) => m.sender === participantB || m.receiver === participantB
       );
     },
